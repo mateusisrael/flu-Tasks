@@ -5,7 +5,7 @@ class Tasks extends StatefulWidget {
 
   final SelectCallback selectTask;
 
-  final List<Map> tasks;
+  final List tasks;
 
   @override
   _TasksState createState() => _TasksState();
@@ -13,7 +13,6 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
   Widget _box(Map<String, String> task) {
-
     return GestureDetector(
         onTap: () {
           widget.selectTask(task["title"]);
@@ -28,14 +27,18 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        // itemCount: _tasks.length + 1 * 2,
-        itemCount: widget.tasks.length,
-        itemBuilder: (context, i) {
-          final currentTask = widget.tasks[i];
-          return _box(currentTask);
-          // return Container(child: Text("Teste"));
-        });
+    if (widget.tasks.length > 0) {
+      return ListView.builder(
+          // itemCount: _tasks.length + 1 * 2,
+          itemCount: widget.tasks.length,
+          itemBuilder: (context, i) {
+            final currentTask = widget.tasks[i];
+            return _box(currentTask);
+            // return Container(child: Text("Teste"));
+          });
+    } else if (widget.tasks.length <= 0) {
+      return Center(child: Text("Nenhuma tarefa"));
+    }
   }
 }
 

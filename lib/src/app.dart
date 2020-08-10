@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './screens/Home.dart';
+import './screens/NewTaskEditor.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,7 +9,10 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Today',
       initialRoute: '/',
-      routes: {'/': (context) => MyList()},
+      routes: {
+        '/': (context) => MyList(),
+        '/newTask': (context) => NewTaskEditor()
+      },
     );
   }
 }

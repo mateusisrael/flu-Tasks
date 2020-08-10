@@ -1,30 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tasks/src/screens/NewTaskEditor.dart';
 import 'Tasks.dart';
 
 class MyList extends StatefulWidget {
   @override
-  _MyListState createState() => _MyListState();
+  // _MyListState createState() => _MyListState();
+  State<StatefulWidget> createState() {
+    return _MyListState();
+  }
 }
 
 class _MyListState extends State<MyList> {
   Map _myState = {
     "selectedTask": "",
     "tasks": [
-      {"title": "Lavar louça", "description": "Lavar a louça antes de dormir"},
       {"title": "Meditar", "description": "Meditação profunda"},
-      {"title": "Arrumar a cama", "description": "Arrumar a cama para dormir"},
-      {"title": "Estudar Programação", "description": "Estudar Programação"}
+      // {"title": "Estudar Programação", "description": "Estudar Programação"}
     ]
   };
 
   @override
   Widget build(BuildContext context) {
-
     print(_myState["selectedTask"]);
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             backgroundColor: Color.fromRGBO(37, 42, 49, 1),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewTaskEditor(
+                    onSave: (newTask) {
+                      setState(() {
+                        _myState["tasks"].add(newTask);
+                      });
+                    },
+                  )
+                ),
+              );
+            },
             child: Icon(Icons.add)),
         body: CustomScrollView(
           slivers: <Widget>[
